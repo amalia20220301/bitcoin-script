@@ -5,7 +5,10 @@
   "repository": "git@github.com:amalia20220301/bitcoin-script.git",
   "author": "mrzhao <zhaomengru2018@gmail.com>",
   "license": "MIT",
+  "type": "module",
   "dependencies": {
+    "@noble/hashes": "^1.1.4",
+    "bech32": "^2.0.0",
     "bip32": "^3.0.1",
     "bitcoinjs-lib": "^6.0.1",
     "bs58": "^5.0.0",
