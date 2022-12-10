@@ -1,0 +1,14 @@
+{
+  "name": "bitcoin-script",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:amalia20220301/bitcoin-script.git",
+  "author": "mrzhao <zhaomengru2018@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bip32": "^3.0.1",
+    "bitcoinjs-lib": "^6.0.1",
+    "bs58": "^5.0.0",
+    "bs58check": "^2.1.2"
+  }
+}
