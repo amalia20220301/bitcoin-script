@@ -1,28 +1,13 @@
-const crypto=require('crypto')
-const bs58=require('bs58')
+import bitcoin from "bitcoinjs-lib"
+import crypto from "crypto";
+import {hash256} from "bitcoinjs-lib/src/crypto.js";
 
-function SHA256(buffer) {
-    var hash = crypto.createHash("sha256");
-    hash.update(buffer);
-    return hash.digest()
-}
-
-function RIPEMD160(buffer) {
-    var hash = crypto.createHash("ripemd160");
-    hash.update(buffer);
-    return hash.digest()
-}
-
-const public_key='02da8fa6a1290c376d1eb0a90be60bccd044620a9380a6c09e4a176937f2ece07a';
-var hash160 = RIPEMD160(SHA256(Buffer.from(public_key,'hex'))); //20bytes
-var buffer = Buffer.alloc(21);
-buffer[0] = 0x00;
-hash160.copy(buffer, 1); //000411db93e1dcdb8a016b49840f8c53bc1eb68a382e97b1482ecad7b148a6909a5cb2e0eaddfb84ccf9744464f82e160bfa9b8b64f9d4c03f999b8643f656b412a3
-var address_buffer = Buffer.alloc(25);
-buffer.copy(address_buffer);
-var checksum = SHA256(SHA256(buffer));
-checksum.copy(address_buffer, 21);
-const address=bs58.encode(address_buffer)
-console.log(`address: ${address}`);
-console.log(`hash160 ${hash160.toString('hex')}`)
-
+let tx = bitcoin.Transaction.fromHex("0200000000010234062cad2bb61622f936bac925ea08ee125591e158266cfec705372f57cfe9fe0000000000000000800e2760894d3b06785f90def5f45262f6ed66bd49b1768c7e49385243a6ef3aba010000000000000080011e04000000000000160014ce2ef55e561be15ef65dcc79f998117e142d60160247304402202a459acd9630beaa14cee3ee526fbe7397e70f484be2b8ee609a4a64b380293602203231be119dde9beeb3f2f11f1b07551ea83f068ed990b4b3d04ded89fbf581c4012103f2d30c1865c0b9dd1fc7ae733346ff831dc4456728f01d171787a94f86d6848b0247304402206c6aaf535595c898bbd6516b22f0d1dbf4ff406c1ac4f1a95aad8bc6ee1706050220793fea3cb883b5913835c50be0f129de5af278577025587ceaac2bc20363efe7012102eda671693a645ea1ca910e0faac39c82f2c55fa6ec111ff8a58e7560231aef2b00000000");
+// console.log('----------------')
+// console.log("id", tx.getId())
+// console.log("toHex", tx.toHex())
+// console.log("hex", Buffer.from(tx.__toBuffer(undefined,undefined,false),'hex').toString('hex'))
+// console.log('----------------')
+const hash =hash256(Buffer.from("020000000234062cad2bb61622f936bac925ea08ee125591e158266cfec705372f57cfe9fe0000000000000000800e2760894d3b06785f90def5f45262f6ed66bd49b1768c7e49385243a6ef3aba010000000000000080011e04000000000000160014ce2ef55e561be15ef65dcc79f998117e142d601600000000",'hex'));
+console.log(hash.toString('hex'))
+// 020000000234062cad2bb61622f936bac925ea08ee125591e158266cfec705372f57cfe9fe0000000000000000800e2760894d3b06785f90def5f45262f6ed66bd49b1768c7e49385243a6ef3aba010000000000000080011e04000000000000160014ce2ef55e561be15ef65dcc79f998117e142d601600000000
